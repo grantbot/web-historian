@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
 
-exports.paths = {
+exports.paths = paths = {
   'siteAssets' : path.join(__dirname, '../web/public'),
   'archivedSites' : path.join(__dirname, '../archives/sites'),
   'list' : path.join(__dirname, '../archives/sites.txt'),
@@ -22,7 +22,18 @@ exports.initialize = function(pathsObj){
 
 exports.readListOfUrls = function(){
   // Read sites.txt and return it in a useful format
+  var result;
 
+  fs.readFile(paths.list, "utf8", function(err, data) {
+    if (err) {
+      throw err;
+    }
+    else {
+      result = data;
+    }
+  });
+
+  return result;
 };
 
 exports.isUrlInList = function(){

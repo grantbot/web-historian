@@ -20,9 +20,9 @@ exports.handleRequest = function (req, res, filePath) {
     console.log("POST REQUEST RECEIVED");
     req.on("data", function(data) {
       var url = data.toString().split("=")[1];
-      console.log(url)
-
-
+      // console.log(url);
+      var stuff = archive.readListOfUrls()
+      console.log("onpost: " + stuff);
     })
   }
 
