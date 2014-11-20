@@ -16,13 +16,18 @@ exports.handleRequest = function (req, res, filePath) {
     console.log("GET REQUEST RECEIVED")
     httpHelpers.serveAssets(res, filePath);
   }
+
   if (req.method === "POST") {
     console.log("POST REQUEST RECEIVED");
+
     req.on("data", function(data) {
       var url = data.toString().split("=")[1];
-      // console.log(url);
-      var stuff = archive.readListOfUrls()
-      console.log("onpost: " + stuff);
+
+      archive.isUrlInList(url, function(result) {
+        console.log("within stuff: " + result);
+        return result;
+      });
+
     })
   }
 
@@ -37,7 +42,7 @@ exports.handleRequest = function (req, res, filePath) {
       //Else, serve loading screen
 
     //Else, archiveUrl has never been seen
-      //So we add it to our list
       //Serve loading screen
+      //So we add it to our fetchList with a \n
 
 };

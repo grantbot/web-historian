@@ -4,8 +4,9 @@ var _ = require('underscore');
 
 exports.paths = paths = {
   'siteAssets' : path.join(__dirname, '../web/public'),
-  'archivedSites' : path.join(__dirname, '../archives/sites'),
-  'list' : path.join(__dirname, '../archives/sites.txt'),
+  'archivedSitesHtml' : path.join(__dirname, '../archives/sites'),
+  'archivedSitesList' : path.join(__dirname, '../archives/sites.txt'),
+  'fetchList': path.join(__dirname, '../archives/fetchList.txt'),
   '/': path.join(__dirname, "../web/public/index.html")
 };
 
@@ -20,34 +21,36 @@ exports.initialize = function(pathsObj){
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function(){
+exports.readListOfUrls = readListOfUrls = function(callback){
   // Read sites.txt and return it in a useful format
-  var result;
-
-  fs.readFile(paths.list, "utf8", function(err, data) {
+  fs.readFile(paths.archivedSitesList, "utf8", function(err, data) {
     if (err) {
       throw err;
     }
     else {
-      result = data;
+      console.log("IN READLISTOFURLS: ", data);
+      return callback(data);
     }
   });
 
-  return result;
 };
 
-exports.isUrlInList = function(){
+exports.isUrlInList = isUrlInList = function(url, callback){
   // return true if input url is in the list of urls (indexOf?)
+  return readListOfUrls(function(data) {
+    // console.log("inside isurlinlist: " + data);
+    return callback(data.indexOf(url) !== -1);
+  })
 };
 
-exports.addUrlToList = function(){
+exports.addUrlToList = addUrlToList = function(){
   // push an input url into the url list
 };
 
 
 
 
-exports.isURLArchived = function(){
+exports.isURLArchived = isURLArchived = function(){
   // return true if input url is in the archive list
 };
 
