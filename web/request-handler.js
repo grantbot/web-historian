@@ -6,10 +6,10 @@ var httpHelpers = require('./http-helpers');
 
 var paths = archive.paths;
 
-// handlRequest will have to pass in direct filePaths to
-// serveAssets function
+//TODO: Clear form after submission, maybe in an inline script
 
 exports.handleRequest = function (req, res, filePath) {
+
   console.log("SERVING ", req.url)
 
   console.log("handleRequest Called");
@@ -35,10 +35,11 @@ exports.handleRequest = function (req, res, filePath) {
           httpHelpers.serveAssets(res, archivePath);
 
         } else {
+          //Serve loading page immediately
+          httpHelpers.serveAssets(res, paths.loading);
+          //Add to fetch list with a /n if not already there
           var fetchListPath = paths.fetchList;
           archive.addUrlToList(fetchListPath, url);
-          //Serve loading page immediately
-          //Add to fetch list with a /n if not already there
         }
       });
 

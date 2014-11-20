@@ -7,7 +7,8 @@ exports.paths = paths = {
   'archivedSitesHtml' : path.join(__dirname, '../archives/sites'),
   'archivedSitesList' : path.join(__dirname, '../archives/sites.txt'),
   'fetchList': path.join(__dirname, '../archives/fetchList.txt'),
-  '/': path.join(__dirname, "../web/public/index.html")
+  '/': path.join(__dirname, "../web/public/index.html"),
+  'loading': path.join(__dirname, "../web/public/loading.html")
 };
 
 // Used for stubbing paths for jasmine tests, do not modify
@@ -45,10 +46,10 @@ exports.getArchivedHtmlPath = getArchivedHtmlPath = function(url, callback) {
   return archivePath;
 }
 
-exports.addUrlToList = addUrlToList = function(list, url, callback){
+exports.addUrlToList = addUrlToList = function(list, url){
   // push an input url into the url list
   var appendingString = url + "\n";
-  console.log(appendingString);
+  console.log("APPENDER CONSIDERING URL", appendingString);
 
   var appender = function(present){
     if (!present){
@@ -57,7 +58,7 @@ exports.addUrlToList = addUrlToList = function(list, url, callback){
           throw err;
         }
         else {
-          console.log("SUCCESSFULLY APPENDED TO FETCH LIST");
+          console.log("SUCCESSFULLY APPENDED TO " + list);
         }
       })
     }else console.log('fuck off ITS IN THERE ARREDY');
@@ -65,4 +66,16 @@ exports.addUrlToList = addUrlToList = function(list, url, callback){
 
   isUrlInList(list, appendingString, appender);
 };
+
+exports.downloadHtml = downloadHtml = function(path, url, buffer) {
+  console.log("IN DOWNLOAD");
+
+  fs.writeFile(path + "/" + url + ".html", buffer.toString(), function(err) {
+    if (err) {
+      throw err;
+      return;
+    }
+    console.log("HTML ARCHIVED");
+  });
+}
 
