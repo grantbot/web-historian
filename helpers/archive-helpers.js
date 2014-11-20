@@ -2,17 +2,11 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
 
-/*
- * You will need to reuse the same paths many times over in the course of this sprint.
- * Consider using the `paths` object below to store frequently used file paths. This way,
- * if you move any files, you'll only need to change your code in one place! Feel free to
- * customize it in any way you wish.
- */
-
 exports.paths = {
   'siteAssets' : path.join(__dirname, '../web/public'),
   'archivedSites' : path.join(__dirname, '../archives/sites'),
-  'list' : path.join(__dirname, '../archives/sites.txt')
+  'list' : path.join(__dirname, '../archives/sites.txt'),
+  '/': path.join(__dirname, "../web/public/index.html")
 };
 
 // Used for stubbing paths for jasmine tests, do not modify
@@ -22,20 +16,30 @@ exports.initialize = function(pathsObj){
   });
 };
 
+
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(){
+  // Read sites.txt and return it in a useful format
+
 };
 
 exports.isUrlInList = function(){
+  // return true if input url is in the list of urls (indexOf?)
 };
 
 exports.addUrlToList = function(){
+  // push an input url into the url list
 };
 
+
+
+
 exports.isURLArchived = function(){
+  // return true if input url is in the archive list
 };
 
 exports.downloadUrls = function(){
+  //
 };
