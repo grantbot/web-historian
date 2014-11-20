@@ -4,6 +4,8 @@ var URL = require("url");
 var archive = require('../helpers/archive-helpers');
 var httpHelpers = require('./http-helpers');
 
+var paths = archive.paths;
+
 // handlRequest will have to pass in direct filePaths to
 // serveAssets function
 
@@ -23,9 +25,13 @@ exports.handleRequest = function (req, res, filePath) {
     req.on("data", function(data) {
       var url = data.toString().split("=")[1];
 
-      archive.isUrlInList(url, function(result) {
-        console.log("within stuff: " + result);
-        return result;
+      archive.isUrlInList(paths.archivedSitesList, url, function(isInArchiveList) {
+        console.log("Is in list?: " + isInArchiveList);
+        // if (isInArchiveList) {
+        //   //Serve up archived version
+        // } else {
+
+        // }
       });
 
     })
