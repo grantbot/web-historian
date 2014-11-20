@@ -45,6 +45,10 @@ exports.addUrlToList = addUrlToList = function(list, url, callback){
 
 };
 
+exports.getArchivedHtml = getArchivedHtml = function(url, callback) {
+  var archivePath = paths.archivedSitesHtml + "/" + url + ".html";
+  return archivePath;
+}
 
 
 

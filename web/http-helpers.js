@@ -11,6 +11,7 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset) {
+  //asset is the direct filepath
   fs.readFile(asset, function(err, data) {
     if (err) {
       console.log("error: " + err);

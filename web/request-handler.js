@@ -27,28 +27,19 @@ exports.handleRequest = function (req, res, filePath) {
 
       archive.isUrlInList(paths.archivedSitesList, url, function(isInArchiveList) {
         console.log("Is in list?: " + isInArchiveList);
-        // if (isInArchiveList) {
-        //   //Serve up archived version
-        // } else {
 
-        // }
+        if (isInArchiveList) {
+          console.log("ITS IN THE ARCHIVE. SERVE.")
+
+          var archivePath = archive.getArchivedHtml(url);
+          httpHelpers.serveAssets(res, archivePath);
+
+        } else {
+          //Serve loading page immediately
+          //Add to fetch list with a /n if not already there
+        }
       });
 
     })
   }
-
-
-  //Extract user input --> archiveUrl
-
-  //If POST request
-    //If archiveUrl is in our list
-      //If archiveUrl has already been archived
-        //Serve archived version from server
-
-      //Else, serve loading screen
-
-    //Else, archiveUrl has never been seen
-      //Serve loading screen
-      //So we add it to our fetchList with a \n
-
 };
