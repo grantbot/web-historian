@@ -42,20 +42,26 @@ exports.isUrlInList = isUrlInList = function(list, url, callback){
 
 exports.addUrlToList = addUrlToList = function(list, url, callback){
   // push an input url into the url list
+  var appendingString = url + "\n";
+  console.log(appendingString);
 
+  var appender = function(present){
+    if (!present){
+      fs.appendFile(list, appendingString, function(err) {
+        if (err) {
+          throw err;
+        }
+        else {
+          console.log("SUCCESSFULLY APPENDED TO FETCH LIST");
+        }
+      })
+    }else console.log('fuck off ITS IN THERE ARREDY');
+  }
+
+  isUrlInList(list, appendingString, appender);
 };
 
-exports.getArchivedHtml = getArchivedHtml = function(url, callback) {
+exports.getArchivedHtmlPath = getArchivedHtmlPath = function(url, callback) {
   var archivePath = paths.archivedSitesHtml + "/" + url + ".html";
   return archivePath;
 }
-
-
-
-exports.isURLArchived = isURLArchived = function(){
-  // return true if input url is in the archive list
-};
-
-exports.downloadUrls = function(){
-  //
-};

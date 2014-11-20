@@ -31,10 +31,12 @@ exports.handleRequest = function (req, res, filePath) {
         if (isInArchiveList) {
           console.log("ITS IN THE ARCHIVE. SERVE.")
 
-          var archivePath = archive.getArchivedHtml(url);
+          var archivePath = archive.getArchivedHtmlPath(url);
           httpHelpers.serveAssets(res, archivePath);
 
         } else {
+          var fetchListPath = paths.fetchList;
+          archive.addUrlToList(fetchListPath, url);
           //Serve loading page immediately
           //Add to fetch list with a /n if not already there
         }
