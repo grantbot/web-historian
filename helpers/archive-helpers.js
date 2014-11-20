@@ -40,6 +40,11 @@ exports.isUrlInList = isUrlInList = function(list, url, callback){
   })
 };
 
+exports.getArchivedHtmlPath = getArchivedHtmlPath = function(url, callback) {
+  var archivePath = paths.archivedSitesHtml + "/" + url + ".html";
+  return archivePath;
+}
+
 exports.addUrlToList = addUrlToList = function(list, url, callback){
   // push an input url into the url list
   var appendingString = url + "\n";
@@ -61,7 +66,3 @@ exports.addUrlToList = addUrlToList = function(list, url, callback){
   isUrlInList(list, appendingString, appender);
 };
 
-exports.getArchivedHtmlPath = getArchivedHtmlPath = function(url, callback) {
-  var archivePath = paths.archivedSitesHtml + "/" + url + ".html";
-  return archivePath;
-}
